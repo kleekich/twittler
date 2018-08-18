@@ -16,10 +16,9 @@
       */
 
       $(document).ready(function(){
-        var $body = $('body');
-        $body.html('');
-
         var renderNewTweets = function(){
+          var $body = $('body');
+          $body.html('');
           var index = streams.home.length - 1;
           while(index >= 0){
             var tweet = streams.home[index];
@@ -28,19 +27,12 @@
             $tweet.appendTo($body);
             index -= 1;
           }
+          //Create a button for new tweets
+          var $newTweetsButton = $('<button>New Tweets</button>');
+          $newTweetsButton.appendTo('body');
+          $newTweetsButton.click(renderNewTweets);
         }
-        renderNewTweets();
-        
-
-        //Create a button for new tweets
-        var $newTweetsButton = $('<button>New Tweets</button>');
-        $newTweetsButton.appendTo('body');
-        $newTweetsButton.click(function(){
-          
-        });
-
-        
-
+        renderNewTweets(); 
       });
 
     
