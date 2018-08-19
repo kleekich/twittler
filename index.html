@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+
     <script src="jquery.js"></script>
     <script src="data_generator.js"></script>
     <script>
@@ -32,7 +33,9 @@
           $newTweetsButton.appendTo('body');
           $newTweetsButton.click(renderNewTweets);
         }
-        renderNewTweets(); 
+        renderNewTweets();
+        var $timeline = $('<a href="timeline.html">Go to Timeline<a>');
+        $timeline.appendTo('body');
       });
 
       function getFormattedDate(date){
