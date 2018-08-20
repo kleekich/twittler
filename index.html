@@ -4,6 +4,7 @@
 
     <script src="jquery.js"></script>
     <script src="data_generator.js"></script>
+    <link rel="stylesheet" href="index.css">
     <script>
 
       /*
@@ -17,42 +18,32 @@
       */
 
       $(document).ready(function(){
-        var renderNewTweets = function(){
-          var $body = $('body');
-          $body.html('');
-          for(var i = streams.home.length - 1; i>=0; i--){
-            var tweet = streams.home[i];
-            var $tweet = $('<div></div>');
-            //$tweet.append('<a href="http://google.com">'+ tweet.user + '</a>');
-            $tweet.append('@<a href="timeline.html">' + tweet.user + '</a>: ' + tweet.message +' | ' +tweet.created_at);
-            $tweet.appendTo($body);
+        var $ul = $('ul');
+        var renderAllTweets = function(){
+          $ul.html('<ul><ul>'); 
+          var index = streams.home.length - 1;
+          while(index >= 0){
+            var tweet = streams.home[index];
+            var $tweet = $('<li></li>');
+            $tweet.append('@<a href="timeline.html">' + tweet.user + '</a>: ' + tweet.message +' | ' + tweet.created_at);
+            $tweet.appendTo($ul);
+            index -= 1;
           }
-          //Create a button for new tweets
-          var $newTweetsButton = $('<button>New Tweets</button>');
-          $newTweetsButton.appendTo('body');
-          $newTweetsButton.click(renderNewTweets);
         }
-        renderNewTweets();
+        renderAllTweets();
+
+        $('#newTweetsButton').click(renderAllTweets);
+
+
       });
 
-      function getFormattedDate(date){
-        var year = date.getFullYear();
-        var month = (1 + date.getMonth()).toString();
-        month = month.length > 1 ? month : '0' + month;
 
-        var day = date.getDate().toString();
-        day = day.length > 1 ? day : '0' + day;
-
-        var hour = date.getHours();
-        var minute = date.getMinutes();
-        var second = date.getSeconds();
-  
-        return '(' + hour + ' : ' + minute + ' : ' + second + ') '+ month + '/' + day + '/' + year;
-      }
     </script>
   </head>
   <body>
-
+    <h1>Twittler Application<h1>
+    <button id="newTweetsButton">Feed New Tweets</button>
+    <ul></ul>
   </body>
 </html>
 
