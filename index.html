@@ -20,13 +20,11 @@
         var renderNewTweets = function(){
           var $body = $('body');
           $body.html('');
-          var index = streams.home.length - 1;
-          while(index >= 0){
-            var tweet = streams.home[index];
+          for(var i = streams.home.length - 1; i>=0; i--){
+            var tweet = streams.home[i];
             var $tweet = $('<div></div>');
-            $tweet.text('@' + tweet.user + ': ' + tweet.message +' | ' +getFormattedDate(tweet.created_at));
+            $tweet.text('@' + tweet.user + ': ' + tweet.message +' | ' +tweet.created_at);
             $tweet.appendTo($body);
-            index -= 1;
           }
           //Create a button for new tweets
           var $newTweetsButton = $('<button>New Tweets</button>');
