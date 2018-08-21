@@ -21,22 +21,45 @@
         var $ul = $('ul');
         var renderAllTweets = function(){
           $ul.html('<ul><ul>'); 
-          var index = streams.home.length - 1;
-          while(index >= 0){
+          
+          for(var index = streams.home.length - 1; index >= 0; index--){
             var tweet = streams.home[index];
             var $tweet = $('<li></li>');
+            var $name = $('<span class="userName" id="' + tweet.user + '">' + tweet.user +' </span>');
+            $name.click({user: tweet.user}, renderUserTimeLine);
+            $tweet.append('@');
+            $tweet.append($name);
             $tweet.append(
-                            '@<a href="timeline.html?user='+tweet.user +'">' + tweet.user + '</a>' + 
                             '(' +timeSince(tweet.created_at) + ' ago) ' +
                             tweet.message +' | ' +
                             getFormattedDate(tweet.created_at)
                           );
+            
             $tweet.appendTo($ul);
-            index -= 1;
+            //Set clickListener to user names
+            //$('#'+tweet.user+).click({user: tweet.user}, renderUserTimeLine);
           }
         }
         renderAllTweets();
-        $('#newTweetsButton').click(renderAllTweets);
+        $('#newTweetsButton').click( renderAllTweets);
+
+        function renderUserTimeLine(event){
+          var user = event.data.user;
+          $ul.html('<ul><ul>'); 
+          //Getting array of tweets by this user
+          var tweetsByUser = streams.users[user];
+
+          //Populated the tweets as <li> elements in our <ul> 
+          for(var i = tweetsByUser.length -1; i >= 0; i--){
+            var tweet = tweetsByUser[i];
+            //initialize with <li> element
+            var $tweet = $('<li></li>');
+            //Insert tweet as a text
+            $tweet.text('@' + tweet.user + ': ' + tweet.message +' | ' +getFormattedDate(tweet.created_at));
+            //append this tweet <li> to our <ul>
+                  $tweet.appendTo($ul);
+          }
+        }
 
       });
 
