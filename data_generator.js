@@ -11,6 +11,8 @@ streams.users.shawndrost = [];
 streams.users.sharksforcheap = [];
 streams.users.mracus = [];
 streams.users.douglascalhoun = [];
+
+//Visitors array
 window.visitors = {};
 visitors.users = {};
 
@@ -69,10 +71,12 @@ var writeTweet = function(message){
   tweet.user = visitor;
   tweet.message = message;
   tweet.created_at = new Date();
+  //If this user is a new user, we need to create an tweets array for this user
   if(visitors.users[tweet.user] === undefined){
     visitors.users[tweet.user] = [];
   }
+  //Push tweet to this visitors array
   visitors.users[tweet.user].push(tweet);
-  //visitorArray.push(tweet.message);
+  //Push tweet to streams.home
   streams.home.push(tweet);
 };
