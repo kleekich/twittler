@@ -47,12 +47,13 @@
             $name.click({user: tweet.user}, renderUserTimeLine);
 
             //Build a tweet item
-            $tweet.append('<span id="at">@</span>');
+            $tweet.append('<span class="gray" id="at">@</span>');
             $tweet.append($name);
-            $tweet.append('<span id="ago">(' +timeSince(tweet.created_at) + ' ago)</span> ');
-            $tweet.append(tweet.message +' | ');
-            $tweet.append(moment(tweet.created_at).format('h:mm:ss a - MMM D, YYYY'));
-            
+            $tweet.append(
+                           '<span class="gray" id="ago">(' +timeSince(tweet.created_at) + ' ago)</span> ' +
+                           tweet.message +
+                           '<span class="gray" id="date">  '+ moment(tweet.created_at).format('h:mm:ss a - MMM D, YYYY') + '</span>'
+                          );
             //append to our ul
             $tweet.appendTo($ul);
           }
@@ -80,7 +81,7 @@
             //initialize with <li> element
             var $tweet = $('<li></li>');
             //Insert tweet as a text
-            $tweet.text('@' + tweet.user + ': ' + tweet.message +' | ' +getFormattedDate(tweet.created_at));
+            $tweet.append('@' + tweet.user + ': ' + tweet.message +' | ' +'<span class="gray" id="date">  '+ moment(tweet.created_at).format('h:mm:ss a - MMM D, YYYY') + '</span>');
             //append this tweet <li> to our <ul>
                   $tweet.appendTo($ul);
           }
