@@ -5,7 +5,7 @@
     <script src="jquery.js"></script>
     <script src="data_generator.js"></script>
     <link rel="stylesheet" href="index.css">
-    <script>
+    <script type="text/javascript">
 
       /*
       Show the user new tweets somehow. (You can show them automatically as they're created, or create a button that displays new tweets.)
@@ -18,7 +18,18 @@
       */
 
       $(document).ready(function(){
+        
+        //streams.users["Kangsik Kevin Lee"] = [];
+        //window.visitor = "Kangsik Kevin Lee";
+        //writeTweet("-------------------------------------------------------------");
+
+        //We are simply manipulating this <ul>
         var $ul = $('ul');
+
+
+        /*
+          This function renders all tweets from the newest tweet to the oldest, top to bottom
+        */
         var renderAllTweets = function(){
           /* Hide TimeLine Header */
           $('#timeLineHeader').hide();
@@ -34,7 +45,7 @@
             $name.click({user: tweet.user}, renderUserTimeLine);
 
             //Build a tweet item
-            $tweet.append('@');
+            $tweet.append('<span id="at">@</span>');
             $tweet.append($name);
             $tweet.append(
                             '(' +timeSince(tweet.created_at) + ' ago) ' +
@@ -45,6 +56,10 @@
             $tweet.appendTo($ul);
           }
         }
+
+        /*
+          This function only renders tweets by selected user
+        */
         function renderUserTimeLine(event){
           //Getting user from parameter
           var user = event.data.user;
