@@ -48,7 +48,7 @@
             $tweet.append('<span id="at">@</span>');
             $tweet.append($name);
             $tweet.append(
-                            '(' +timeSince(tweet.created_at) + ' ago) ' +
+                            '<span id="ago">(' +timeSince(tweet.created_at) + ' ago)</span> ' +
                             tweet.message +' | ' +
                             getFormattedDate(tweet.created_at)
                           );

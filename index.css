@@ -7,7 +7,15 @@ li {
 #at {
 	color: #7f8387;
 }
+
+#ago {
+	font-size: 12px;
+	color: #7f8387;
+}
+
 .userName {
 	color:blue;
 	font-weight: :bold;
+	font-size: 20px;
 }
+
