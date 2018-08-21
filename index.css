@@ -1,15 +1,15 @@
-li {
+body {
 	font-family: "Helvetica Neue";
-
-	font-size: 20px;
 }
 
-#at {
-	color: #7f8387;
+li {
+	font-size: 20px;
 }
 
 #ago {
 	font-size: 12px;
+}
+.gray {
 	color: #7f8387;
 }
 
