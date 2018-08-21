@@ -10,10 +10,15 @@
 				dummy data: mracus
 			*/
 			//Getting array of tweets by this user
+
+
 			var $body = $('body');
           	$body.html('');
-			var userName = 'mracus';
-			var tweetsByUser = streams.users[userName];
+          	//Getting userName
+          	var url_string = window.location.href;
+			var url = new URL(url_string);
+			var user = url.searchParams.get("user");
+			var tweetsByUser = streams.users[user];
 
 			for(var i = tweetsByUser.length -1; i >= 0; i--){
 				var tweet = tweetsByUser[i];
