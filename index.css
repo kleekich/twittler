@@ -1,6 +1,9 @@
 body {
 	font-family: "Helvetica Neue";
 }
+h1 {
+	color: #25649e;
+}
 
 li {
 	font-size: 20px;
