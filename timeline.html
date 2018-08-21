@@ -6,29 +6,30 @@
 	<script src="data_generator.js"></script>
 	<script>
 		$(document).ready(function(){
-			/*
-				dummy data: mracus
-			*/
-			//Getting array of tweets by this user
-
-
+			//We are going to populate this user's tweets to <ul>
 			var $ul = $('ul');
-          	//$body.html('');
-          	//Getting userName
+          	
+          	//Getting user
           	var url_string = window.location.href;
 			var url = new URL(url_string);
 			var user = url.searchParams.get("user");
+			
+			//Update heading with user name
+			$('#user').text(user);
+
+			//Getting array of tweets by this user
 			var tweetsByUser = streams.users[user];
 
+			//Populated the tweets as <li> elements in our <ul> 
 			for(var i = tweetsByUser.length -1; i >= 0; i--){
 				var tweet = tweetsByUser[i];
+				//initialize with <li> element
 				var $tweet = $('<li></li>');
+				//Insert tweet as a text
 				$tweet.text('@' + tweet.user + ': ' + tweet.message +' | ' +getFormattedDate(tweet.created_at));
+				//append this tweet <li> to our <ul>
             	$tweet.appendTo($ul);
 			}
-
-
-
 		});
 		function getFormattedDate(date){
         var year = date.getFullYear();
@@ -47,7 +48,7 @@
 	</script>
 </head>
 <body>
-	<h1>User's Timeline Page</h1>
+	<h1><span id="user">User</span>'s Timeline Page</h1>
 	<ul></ul>
 </body>
 </html>
