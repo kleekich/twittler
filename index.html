@@ -20,13 +20,20 @@
       $(document).ready(function(){
         var $ul = $('ul');
         var renderAllTweets = function(){
+          /* Hide TimeLine Header */
+          $('#timeLineHeader').hide();
+
+          /* Tweet List */
           $ul.html('<ul><ul>'); 
           
           for(var index = streams.home.length - 1; index >= 0; index--){
             var tweet = streams.home[index];
             var $tweet = $('<li></li>');
+            //Create a clickable name element with renderUserTimeLine function
             var $name = $('<span class="userName" id="' + tweet.user + '">' + tweet.user +' </span>');
             $name.click({user: tweet.user}, renderUserTimeLine);
+
+            //Build a tweet item
             $tweet.append('@');
             $tweet.append($name);
             $tweet.append(
@@ -34,17 +41,19 @@
                             tweet.message +' | ' +
                             getFormattedDate(tweet.created_at)
                           );
-            
+            //append to our ul
             $tweet.appendTo($ul);
-            //Set clickListener to user names
-            //$('#'+tweet.user+).click({user: tweet.user}, renderUserTimeLine);
           }
         }
-        renderAllTweets();
-        $('#newTweetsButton').click( renderAllTweets);
-
         function renderUserTimeLine(event){
+          //Getting user from parameter
           var user = event.data.user;
+
+          /*TimeLine Header*/
+          $('#userName').text(user);
+          $('#timeLineHeader').show();
+          
+          /*Tweet List*/
           $ul.html('<ul><ul>'); 
           //Getting array of tweets by this user
           var tweetsByUser = streams.users[user];
@@ -61,6 +70,9 @@
           }
         }
 
+        //When Ready, 
+        renderAllTweets();
+        $('#newTweetsButton').click(renderAllTweets);
       });
 
       function getFormattedDate(date){
@@ -110,6 +122,7 @@
   <body>
     <h1>Twittler Application<h1>
     <button id="newTweetsButton">Feed New Tweets</button>
+    <h1 id="timeLineHeader"><span id="userName">User</span>'s Timeline Page</h1>
     <ul></ul>
   </body>
 </html>
