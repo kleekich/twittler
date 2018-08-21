@@ -4,7 +4,9 @@
 
     <script src="jquery.js"></script>
     <script src="data_generator.js"></script>
+    <script src="https://momentjs.com/downloads/moment.min.js"></script>
     <link rel="stylesheet" href="index.css">
+
     <script type="text/javascript">
 
       /*
@@ -18,11 +20,11 @@
       */
 
       $(document).ready(function(){
+        //var moment = require('moment');
+        // streams.users["Kangsik Kevin Lee"] = [];
+        // window.visitor = "Kangsik Kevin Lee";
+        // writeTweet("-------------------------------------------------------------");
         
-        //streams.users["Kangsik Kevin Lee"] = [];
-        //window.visitor = "Kangsik Kevin Lee";
-        //writeTweet("-------------------------------------------------------------");
-
         //We are simply manipulating this <ul>
         var $ul = $('ul');
 
@@ -47,11 +49,10 @@
             //Build a tweet item
             $tweet.append('<span id="at">@</span>');
             $tweet.append($name);
-            $tweet.append(
-                            '<span id="ago">(' +timeSince(tweet.created_at) + ' ago)</span> ' +
-                            tweet.message +' | ' +
-                            getFormattedDate(tweet.created_at)
-                          );
+            $tweet.append('<span id="ago">(' +timeSince(tweet.created_at) + ' ago)</span> ');
+            $tweet.append(tweet.message +' | ');
+            $tweet.append(moment(tweet.created_at).format('h:mm:ss a - MMM D, YYYY'));
+            
             //append to our ul
             $tweet.appendTo($ul);
           }
@@ -89,21 +90,6 @@
         renderAllTweets();
         $('#newTweetsButton').click(renderAllTweets);
       });
-
-      function getFormattedDate(date){
-        var year = date.getFullYear();
-        var month = (1 + date.getMonth()).toString();
-        month = month.length > 1 ? month : '0' + month;
-
-        var day = date.getDate().toString();
-        day = day.length > 1 ? day : '0' + day;
-
-        var hour = date.getHours();
-        var minute = date.getMinutes();
-        var second = date.getSeconds();
-  
-        return '(' + hour + ' : ' + minute + ' : ' + second + ') '+ month + '/' + day + '/' + year;
-      }
 
       function timeSince(date) {
 
