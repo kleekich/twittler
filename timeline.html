@@ -6,6 +6,10 @@
 	<script src="data_generator.js"></script>
 	<script>
 		$(document).ready(function(){
+			$('button').click(function(){
+				window.history.go(-1);
+			});
+
 			//We are going to populate this user's tweets to <ul>
 			var $ul = $('ul');
           	
@@ -49,6 +53,7 @@
 </head>
 <body>
 	<h1><span id="user">User</span>'s Timeline Page</h1>
+	<button>Back to New Tweets</button>
 	<ul></ul>
 </body>
 </html>
