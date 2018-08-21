@@ -20,19 +20,14 @@
       */
 
       $(document).ready(function(){
-        //var moment = require('moment');
-        // streams.users["Kangsik Kevin Lee"] = [];
-        // window.visitor = "Kangsik Kevin Lee";
-        // writeTweet("-------------------------------------------------------------");
-        
-        //We are simply manipulating this <ul>
-        var $ul = $('ul');
-
 
         /*
           This function renders all tweets from the newest tweet to the oldest, top to bottom
         */
         var renderAllTweets = function(){
+          //We are simply manipulating this <ul>
+          var $ul = $('ul');
+
           /* Hide TimeLine Header */
           $('#timeLineHeader').hide();
 
@@ -63,6 +58,9 @@
           This function only renders tweets by selected user
         */
         function renderUserTimeLine(event){
+          //We are simply manipulating this <ul>
+          var $ul = $('ul');
+
           //Getting user from parameter
           var user = event.data.user;
 
@@ -73,7 +71,7 @@
           /*Tweet List*/
           $ul.html('<ul><ul>'); 
           //Getting array of tweets by this user
-          var tweetsByUser = streams.users[user];
+          var tweetsByUser = streams.users[user] !== undefined? streams.users[user]: visitors.users[window.visitor];
 
           //Populated the tweets as <li> elements in our <ul> 
           for(var i = tweetsByUser.length -1; i >= 0; i--){
@@ -93,8 +91,22 @@
         }
 
         //When Ready, 
+        
         renderAllTweets();
+        
         $('#newTweetsButton').click(renderAllTweets);
+
+        $('#tweetButton').click(function(){
+          var currentUser = $('#usernameInput').val();
+          var content = $('#contentInput').val();
+          if(currentUser !== '' && content !== ''){
+            window.visitor = currentUser;
+            writeTweet(content);
+            renderAllTweets();
+          }else{
+            alert("Please put your name and content to tweet");
+          }
+        });
       });
 
       function timeSince(date) {
@@ -130,6 +142,13 @@
     <h1>Twittler Application<h1>
     <button id="newTweetsButton">Feed New Tweets</button>
     <h1 id="timeLineHeader"><span id="userName">User</span>'s Timeline Page</h1>
+    <!-- <form action=""> -->
+      <!-- <label> -->
+      <lable>User Name: <input id="usernameInput" type="text" placeholder="username"></lable>
+      <input id="contentInput" type="text" placeholder="What's happening?">
+      <button id="tweetButton">Tweet</button>
+    <!-- </form> -->
+
     <ul></ul>
   </body>
 </html>

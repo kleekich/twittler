@@ -11,6 +11,9 @@ streams.users.shawndrost = [];
 streams.users.sharksforcheap = [];
 streams.users.mracus = [];
 streams.users.douglascalhoun = [];
+window.visitors = {};
+visitors.users = {};
+
 window.users = Object.keys(streams.users);
 
 // utility function for adding tweets to our data structures
@@ -66,5 +69,10 @@ var writeTweet = function(message){
   tweet.user = visitor;
   tweet.message = message;
   tweet.created_at = new Date();
-  addTweet(tweet);
+  if(visitors.users[tweet.user] === undefined){
+    visitors.users[tweet.user] = [];
+  }
+  visitors.users[tweet.user].push(tweet);
+  //visitorArray.push(tweet.message);
+  streams.home.push(tweet);
 };
