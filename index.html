@@ -81,7 +81,12 @@
             //initialize with <li> element
             var $tweet = $('<li></li>');
             //Insert tweet as a text
-            $tweet.append('@' + tweet.user + ': ' + tweet.message +' | ' +'<span class="gray" id="date">  '+ moment(tweet.created_at).format('h:mm:ss a - MMM D, YYYY') + '</span>');
+            $tweet.append('@' +
+                          tweet.user +
+                          '<span class="gray" id="ago">('+timeSince(tweet.created_at)+' ago) </span>' + 
+                          tweet.message +
+                          '<span class="gray" id="date"> '+
+                           moment(tweet.created_at).format('h:mm:ss a - MMM D, YYYY') + '</span>');
             //append this tweet <li> to our <ul>
                   $tweet.appendTo($ul);
           }
